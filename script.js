@@ -88,3 +88,39 @@ document.addEventListener("DOMContentLoaded", () => {
 if (window.matchMedia("(max-width: 920px)").matches) {
   nav.style.position = "fixed";
 }
+
+
+const menuToggle = document.querySelector(".menu-toggle");
+const mobileMenu = document.getElementById("mobileMenu");
+
+function closeMobileMenu(){
+  if (!menuToggle || !mobileMenu) return;
+  menuToggle.classList.remove("open");
+  mobileMenu.classList.remove("open");
+  menuToggle.setAttribute("aria-expanded","false");
+  document.body.classList.remove("menu-open");
+}
+
+if (menuToggle && mobileMenu){
+  menuToggle.addEventListener("click", () => {
+    const isOpen = mobileMenu.classList.toggle("open");
+    menuToggle.classList.toggle("open", isOpen);
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    document.body.classList.toggle("menu-open", isOpen);
+  });
+
+  mobileMenu.querySelectorAll("a[href^='#']").forEach(link => {
+    link.addEventListener("click", () => closeMobileMenu());
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!mobileMenu.classList.contains("open")) return;
+    if (!mobileMenu.contains(e.target) && !menuToggle.contains(e.target)){
+      closeMobileMenu();
+    }
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 920) closeMobileMenu();
+  });
+}
