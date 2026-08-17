@@ -1115,3 +1115,45 @@ img{height:auto}
     animation-duration:6.3s !important;
   }
 }
+
+
+/* v10: truck is now part of the road SVG itself, so it cannot drift off the road */
+.road-svg-locked{
+  overflow:visible;
+}
+.road-svg-locked .svg-truck{
+  filter:drop-shadow(0 6px 7px rgba(0,0,0,.6));
+}
+.road-scene .drive-truck,
+.road-scene .truck-bed,
+.road-scene .truck-cab,
+.road-scene .wheel,
+.road-scene .headlight{
+  display:none !important;
+}
+
+@media(max-width:920px){
+  .road-scene{
+    top:112px !important;
+    left:10px !important;
+    right:10px !important;
+    height:178px !important;
+    overflow:hidden !important;
+  }
+  .road-svg-locked{
+    width:100% !important;
+    height:158px !important;
+    overflow:visible !important;
+  }
+}
+@media(max-width:560px){
+  .road-scene{
+    top:116px !important;
+    left:8px !important;
+    right:8px !important;
+    height:165px !important;
+  }
+  .road-svg-locked{
+    height:148px !important;
+  }
+}
